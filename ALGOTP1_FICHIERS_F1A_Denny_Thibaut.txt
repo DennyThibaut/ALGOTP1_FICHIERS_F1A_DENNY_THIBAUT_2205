@@ -1,0 +1,139 @@
+ALGO: FichierConju
+BUT: Creer un programme qui lit des verbes dans un fichier puis les conjugues au present dans un autre
+ENTREE:Un fichier de verbes
+SORTIE: Les verbes classes par groupe et conjuguer au present de l'indicatif	
+
+CONST
+	V1G <- 'er'
+	V2G <- 'ir'
+	aller='aller'
+
+Procedure CreaFichier1 (var F:FichierTexte)
+	debut
+		Assigner (F,'Verbes.txt')
+		Reecrire (F)
+		SI (IOResult<>0) alors 
+			Ecrire ('Le fichier n existe pas ')
+		Fermer (F)
+		Ajouter(F)
+		Ecrire(F,'rire')
+		Ecrire(F,'recevoir')
+		Ecrire(F,'aller')
+		Ecrire(F,'bouillir')
+		Ecrire(F,'envoyer')
+		Ecrire(F,'peindre')
+		Ecrire(F,'habiter')
+		Ecrire(F,'payer')
+		Ecrire(F,'mourir)
+		Ecrire(F,'hair')
+		Ecrire(F,'vouloir')
+		Ecrire(F,'finir')
+		Ecrire(F,'s''amuser')
+		Fermer(F)
+	fin
+Procedure CreaFichier2 (var G:FichierTexte)
+	debut
+		Assigner(G,'VerbesConj.txt')
+		Reecrire(G)
+		SI (IOResult<>0) alors 
+			Ecrire ('Le fichier n existe pas ')
+		Fermer (F)
+	fin
+Procedure Groupe_Verbes(var F:FichierTexte)
+	var
+		i:Entier
+		ligne:chaine
+	debut
+		Reinitialiser(F)
+		Tant que pas Fin De Fichier(F) faire
+			Lire(F,ligne)
+			SI EXTRAIRE(ligne,longueur(ligne)-1,2)=V1G ET PAS (ligne=aller) alors
+				Ecrire (ligne,' est un verbe du 1er groupe')
+			Sinon Si EXTRAIRE(ligne,longueur(ligne)-1,2)=V2G ET ((ligne='finir') OR (ligne='hair')) alors
+				Ecrire (ligne,' est un verbe du 2eme groupe')
+			Sinon Ecrire (ligne,' est un verbe du 3eme groupe')
+		FinTantQue
+		Fermer(F)
+	fin
+Procedure ConjuVerbe1Grp (var F:Fichiertexte;var G:FichierTexte)
+	var
+		ligne,radical:chaine
+		i:Entier
+	debut
+		Reinitialiser (F)
+		Tant Que Pas Fin De Fichier (F) faire
+			Lire(F,ligne)
+				radical:=EXTRAIRE(ligne,1,longueur(ligne)-2);
+				Ajouter(G)
+				SI (EXTRAIRE(ligne,longueur(ligne)-1,2)=V1G) ET PAS (ligne=aller) alors
+					ECRIRE(G,'Je'+' '+ radical+'e')
+					ECRIRE(G,'Tu'+' '+ radical+'es')
+					ECRIRE(G,'Il/Elle/On'+' '+ radical +'e'))
+					ECRIRE(G,'Nous'+' '+ radical +'ons'))
+					ECRIRE(G,'Vous'+' '+ radical +'ez')
+					ECRIRE(G,'Ils/Elles'+' '+ radical +'ent')
+				Fermer(G)
+		FinTantQue
+		Fermer(F)
+	Fin
+Procedure Affichage1F(var F:FichierTexte)
+	var
+		ligne:chaine
+	debut
+		Reinitialiser(F)
+		TANT QUE Pas Fin De Fichier (F) faire
+			Lire(F,ligne)
+			Ecrire(ligne)
+		FINTantQue
+		Fermer (F)
+	fin
+Procedure Affichage2F(var G:FichierTexte)
+	var
+		ligne:chaine
+	debut
+		Reinitialiser(G)
+		TANT QUE Pas Fin De Fichier (G) faire
+			Lire(G,ligne)
+			Ecrire(ligne)
+		FINTantQue
+		Fermer (G)
+	fin
+Var
+	F,G:FichierTexte
+	DEBUT
+		CreaFichier1(F)
+		CreaFichier2(G)
+		Affichage1F(F)
+		Groupes_Verbes(F)
+		ConjuVerbe1Grp(F,G)
+		Affichage2F(G)
+	FIN.
+	
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
